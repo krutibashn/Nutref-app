@@ -2,55 +2,43 @@
 Nutref isn't just an app; it's a lifestyle companion that seamlessly intertwines your well-being with environmental consciousness. Let's delve into how Nutref harmonizes with your lifestyle choices while promoting sustainability: 
 
 Sustainable Ingredient Choices: 
-
 Nutref guides users towards local and seasonal produce for healthier meals and a reduced carbon footprint. 
 
 Waste-Reducing Recipes: 
-
 By suggesting recipes based on available ingredients, Nutref minimizes food waste and promotes mindful consumption. 
 
 Community-Driven Donations:
-
 The app facilitates easy sharing of surplus food with nearby organizations, fostering community engagement and reducing food insecurity. 
 
 Eco-Conscious Grocery Management: 
-
 Nutref's reminders for expiry dates and integration into meal planning promote efficient grocery management with an environmental focus.
 
 Personalized Nutrition Guidance: 
-
 The AI nutritionist provides tailored advice, promoting healthier lifestyle choices aligned with individual health goals. 
 
 Transparent Donation Process:
-
 Nutref streamlines food donations, creating a transparent exchange between users and organizations, promoting social responsibility.
 
 CREATIVITY: 
 
 Recipe Personalization: 
-
 Nutref tailors recipes to user preferences and available ingredients, turning kitchen moments into exciting culinary adventures.
 
 AI Nutritionist: 
-
 Introduces an AI companion for engaging conversations and personalized advice on maintaining a healthy lifestyle. 
 
 Meal Planning Canvas: 
-
 "Today Food" feature transforms meal planning into a creative canvas, offering 415 artistic recipes based on user inputs.
 
 PRACTICALITY:
 
 Efficient Grocery Management: 
-
 Streamlines grocery tracking, timely reminders for expiry dates, and integrates seamlessly into meal planning.
 
 Real-Time Reminders: 
-
 Provides practical real-time reminders for grocery items and recipe suggestions, ensuring users stay organized. 
 
 Donation Process:
-
 Efficiently facilitates food donations with transparent processes, fostering practical and meaningful community engagement.
 
 TECHNOLOGY STACK: 
