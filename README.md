@@ -3,6 +3,10 @@ PROTOTYPE LINK
 
 https://www.figma.com/proto/tPSTxfPKUhDgz6cjcxSDgI/Nutref?page-id=0%3A1&type=design&node-id=1-2&viewport=139%2C210%2C0.11&t=KkBlSTlDF3cZBE8P-1&scaling=scale-down&starting-point-node-id=1%3A2&mode=design
 
+PRESENTATION LINK
+
+https://docs.google.com/presentation/d/1Zxoq8dcVOMAc58927AzpBAbYseU05mpJ/edit?usp=drivesdk&ouid=110155921156206400056&rtpof=true&sd=true
+
 Nutref isn't just an app; it's a lifestyle companion that seamlessly intertwines your well-being with environmental consciousness. Let's delve into how Nutref harmonizes with your lifestyle choices while promoting sustainability: 
 
 Sustainable Ingredient Choices: 
