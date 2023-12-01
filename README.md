@@ -1,6 +1,10 @@
 # Nutref-app
 PROTOTYPE LINK
 
+https://www.figma.com/proto/tPSTxfPKUhDgz6cjcxSDgI/Nutref?page-id=0%3A1&type=design&node-id=1-2&viewport=139%2C210%2C0.11&t=KkBlSTlDF3cZBE8P-1&scaling=scale-down&starting-point-node-id=1%3A2&mode=design
+
+PROTOTYPE VIDEO
+
 https://drive.google.com/file/d/1Zxyy7Z_jeOAVCGvIBE7Zecjr2DZ896YF/view?usp=drivesdk
 
 PRESENTATION LINK
