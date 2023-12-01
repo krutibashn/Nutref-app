@@ -65,8 +65,12 @@ OVERVIEW:
 
 The Nutref app offers a personalized experience tailored for both individual users and organizations. Upon opening the app, users are presented with two options: User and Organization. If the user selects "User," they are prompted to input essential health statistics such as height, weight, age, and gender. The app then inquires about any allergies (e.g., fish or gluten), health issues (e.g., blood pressure, diabetes, or thyroid), and dietary preferences (vegetarian, vegan, or non-vegetarian). Upon completing the health profile, users are directed to the home page, featuring five main options:
 
-Today Food: • Users can add the ingredients they have at home. The app generates recipes based on available ingredients, providing a list of 415 recipes for ingredients like eggs and onions. This feature ensures a quick and efficient way to utilize existing supplies.
-Meal Plan: • Similar to the "Today Food" option, users add ingredients they have, and the app considers health statistics, issues, allergies, and diet preferences to present a curated list of recipes. For example, it narrows down the options to 145 recipes, ensuring a more personalized meal plan.
-Grocery: • This section displays a list of current grocery items at home. Users can add newly purchased items with their expiry dates. The app sends timely reminders when the expiry date approaches, facilitating efficient grocery management. Users can also integrate these items into the "Today Food" and "Meal Plan" options.
-Chat with AI: • The app features a personalized chat with an AI nutritionist, providing users with valuable information and advice on maintaining a healthy lifestyle.
-Donations: • Users can donate excess food by specifying the quantity and sending a request to nearby organizations. The app informs users about which organization has accepted their donation request, fostering transparency and community engagement.
+Today Food:  Users can add the ingredients they have at home. The app generates recipes based on available ingredients, providing a list of 415 recipes for ingredients like eggs and onions. This feature ensures a quick and efficient way to utilize existing supplies.
+
+Meal Plan: Similar to the "Today Food" option, users add ingredients they have, and the app considers health statistics, issues, allergies, and diet preferences to present a curated list of recipes. For example, it narrows down the options to 145 recipes, ensuring a more personalized meal plan.
+
+Grocery:  This section displays a list of current grocery items at home. Users can add newly purchased items with their expiry dates. The app sends timely reminders when the expiry date approaches, facilitating efficient grocery management. Users can also integrate these items into the "Today Food" and "Meal Plan" options.
+
+Chat with AI: The app features a personalized chat with an AI nutritionist, providing users with valuable information and advice on maintaining a healthy lifestyle.
+
+Donations:  Users can donate excess food by specifying the quantity and sending a request to nearby organizations. The app informs users about which organization has accepted their donation request, fostering transparency and community engagement.
