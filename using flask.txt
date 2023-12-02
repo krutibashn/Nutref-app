@@ -1,0 +1,162 @@
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///nutref.db'
+db = SQLAlchemy(app)
+
+# Classes for TODAY FOOD, MEAL PLANNER, GROCERY, and DONATION
+class RecipeGenerator:
+    def __init__(self, recipe_database):
+        self.recipe_database = recipe_database
+
+    def generate_recipe(self, ingredients):
+        matching_recipes = []
+        for recipe in self.recipe_database:
+            if all(ingredient.lower() in recipe['ingredients'] for ingredient in ingredients):
+                matching_recipes.append(recipe['name'])
+        if not matching_recipes:
+            return "No matching recipes found."
+        return random.choice(matching_recipes)
+
+class PersonalizedMealPlanner:
+    def __init__(self, recipe_database):
+        self.recipe_database = recipe_database
+
+    def generate_personalized_meal_plan(self, user_info, num_options=5):
+        matching_recipes = []
+        for recipe in self.recipe_database:
+            if self.is_recipe_suitable(recipe, user_info):
+                matching_recipes.append(recipe['name'])
+        if not matching_recipes:
+            return "No matching recipes found."
+        return random.sample(matching_recipes, min(num_options, len(matching_recipes)))
+
+    def is_recipe_suitable(self, recipe, user_info):
+        return all(ingredient.lower() not in user_info['allergies'] for ingredient in recipe['ingredients'])
+
+class GroceryManager:
+    def __init__(self):
+        self.grocery_list = []
+        self.reminders = []
+
+    def add_grocery_item(self, item, expiry_date):
+        self.grocery_list.append({'item': item, 'expiry_date': expiry_date})
+        self.schedule_expiry_reminder(item, expiry_date)
+
+    def schedule_expiry_reminder(self, item, expiry_date):
+        reminder_date = datetime.strptime(expiry_date, '%Y-%m-%d') - timedelta(days=1)
+        heapq.heappush(self.reminders, (reminder_date, item))
+
+    def check_expiry_reminders(self):
+        current_date = datetime.now()
+        while self.reminders and self.reminders[0][0] <= current_date:
+            expired_item = heapq.heappop(self.reminders)[1]
+            print(f"Reminder: {expired_item} is expiring soon!")
+
+    def display_grocery_list(self):
+        print("Current Grocery List:")
+        for item_info in self.grocery_list:
+            print(f"{item_info['item']} (Expiry Date: {item_info['expiry_date']})")
+
+class SimpleNutritionChatbot:
+    def generate_nutrition_advice(self, user_input):
+        if "healthy snacks" in user_input.lower():
+            return "Some healthy snack options include fruits, nuts, and yogurt."
+        elif "weight loss" in user_input.lower():
+            return "For weight loss, focus on a balanced diet with plenty of fruits, vegetables, and lean proteins."
+        else:
+            return "I'm sorry, I don't have information on that topic. Please consult a nutritionist for personalized advice."
+
+# Example recipe database
+recipe_database = [
+    {'name': 'Scrambled Eggs', 'ingredients': ['eggs', 'salt', 'pepper']},
+    {'name': 'Onion Omelette', 'ingredients': ['eggs', 'onions', 'salt', 'pepper']},
+    {'name': 'Vegetable Stir-Fry', 'ingredients': ['broccoli', 'carrots', 'bell peppers', 'soy sauce']},
+    # Add more recipes as needed
+]
+
+# Example user information
+user_information = {
+    'allergies': ['peanuts', 'shellfish'],
+    'health_issues': ['hypertension'],
+    'diet_preferences': ['vegetarian']
+}
+
+# Example of how to use the RecipeGenerator
+user_ingredients = ['eggs', 'onions']
+generator = RecipeGenerator(recipe_database)
+generated_recipe = generator.generate_recipe(user_ingredients)
+print(f"Generated Recipe: {generated_recipe}")
+
+# Example of how to use the PersonalizedMealPlanner
+planner = PersonalizedMealPlanner(recipe_database)
+meal_plan = planner.generate_personalized_meal_plan(user_information)
+print(f"Generated Personalized Meal Plan: {meal_plan}")
+
+# Example of how to use the GroceryManager
+grocery_manager = GroceryManager()
+grocery_manager.add_grocery_item('Apples', '2023-12-10')
+grocery_manager.add_grocery_item('Milk', '2023-12-15')
+grocery_manager.display_grocery_list()
+# Simulate checking for expiry reminders
+grocery_manager.check_expiry_reminders()
+
+# Example of how to use the SimpleNutritionChatbot
+chatbot = SimpleNutritionChatbot()
+user_input = "What are some healthy snacks for weight loss?"
+nutrition_advice = chatbot.generate_nutrition_advice(user_input)
+print(f"User: {user_input}")
+print(f"Nutritionist: {nutrition_advice}")
+
+# DONATIONS code using Flask
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    donations = db.relationship('Donation', backref='user', lazy=True)
+
+class Organization(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    donations_received = db.relationship('Donation', backref='organization', lazy=True)
+
+class Donation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    quantity = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    organization_id = db.Column(db.Integer, db.ForeignKey('organization.id'), nullable=False)
+    status = db.Column(db.String(20), default='Pending')
+
+# Initialize the database
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+
+# Routes for TODAY FOOD, MEAL PLANNER, GROCERY, and DONATION
+# ... (existing routes)
+
+# DONATIONS code using Flask
+@app.route('/donate', methods=['POST'])
+def donate_food():
+    data = request.get_json()
+    print("Received data:", data)  # Add this line for debugging
+
+    username = data.get('username')
+    quantity = data.get('quantity')
+    organization_name = data.get('organization_name')
+
+    user = User.query.filter_by(username=username).first()
+    organization = Organization.query.filter_by(name=organization_name).first()
+
+    if not user or not organization:
+        return jsonify({'error': 'User or organization not found'}), 404
+
+    donation = Donation(quantity=quantity, user=user, organization=organization)
+    db.session.add(donation)
+    db.session.commit()
+
+    return jsonify({'message': 'Donation request sent successfully'})
+
+# ... (other routes)
+
+# Run the Flask app
+if __name__ == '__main__':
+    app.run(debug=True)
+
