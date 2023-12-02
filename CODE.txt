@@ -1,0 +1,245 @@
+#TODAY FOOD
+
+import random
+
+class RecipeGenerator:
+    def __init__(self, recipe_database):
+        self.recipe_database = recipe_database
+
+    def generate_recipe(self, ingredients):
+        matching_recipes = []
+
+        for recipe in self.recipe_database:
+            if all(ingredient.lower() in recipe['ingredients'] for ingredient in ingredients):
+                matching_recipes.append(recipe['name'])
+
+        if not matching_recipes:
+            return "No matching recipes found."
+
+        return random.choice(matching_recipes)
+
+# Example recipe database
+recipe_database = [
+    {'name': 'Scrambled Eggs', 'ingredients': ['eggs', 'salt', 'pepper']},
+    {'name': 'Onion Omelette', 'ingredients': ['eggs', 'onions', 'salt', 'pepper']},
+    {'name': 'Vegetable Stir-Fry', 'ingredients': ['broccoli', 'carrots', 'bell peppers', 'soy sauce']},
+    # Add more recipes as needed
+]
+
+def today_meal():
+    user_ingredients = []
+    x = int(input("Enter the number of ingredients you want to cook: "))
+    generator = RecipeGenerator(recipe_database)
+    
+    while x > 0:
+        user_ingredients.append(input("Enter ingredient: "))
+        x -= 1
+
+    generated_recipe = generator.generate_recipe(user_ingredients)
+    print(f"Generated Recipe: {generated_recipe}")
+
+    exit_input = input("Enter 'exit' to leave: ")
+    if exit_input.lower() == 'exit':
+        return
+
+today_meal()
+
+#MEAL PLANNER
+
+import random
+
+
+class PersonalizedMealPlanner:
+    def __init__(self, recipe_database):
+        self.recipe_database = recipe_database
+
+    def generate_personalized_meal_plan(self, allergies, health_issues, diet_preferences, num_options=5):
+        matching_recipes = []
+
+        for recipe in self.recipe_database:
+            if self.is_recipe_suitable(recipe, allergies, health_issues, diet_preferences):
+                matching_recipes.append(recipe['name'])
+
+        if not matching_recipes:
+            return "No matching recipes found."
+
+        return random.sample(matching_recipes, min(num_options, len(matching_recipes)))
+
+    def is_recipe_suitable(self, recipe, allergies, health_issues, diet_preferences):
+        # Check if the recipe meets the user's health criteria
+        # This is a simplified example; in a real-world app, you might have more sophisticated checks
+        return (
+            all(ingredient.lower() not in allergies for ingredient in recipe['ingredients']) and
+            all(issue.lower() not in health_issues for issue in recipe['health_issues']) and
+            (diet_preferences.lower() == 'veg' and 'non-veg' not in recipe['diet_preferences'] or
+             diet_preferences.lower() == 'non-veg' and 'veg' not in recipe['diet_preferences'])
+        )
+
+# Example recipe database
+recipe_database = [
+    {'name': 'Healthy Salad', 'ingredients': ['lettuce', 'tomatoes', 'cucumbers'], 'health_issues': [], 'diet_preferences': ['veg']},
+    {'name': 'Protein-Packed Bowl', 'ingredients': ['chicken', 'quinoa', 'broccoli'], 'health_issues': [], 'diet_preferences': ['non-veg']},
+    {'name': 'Vegetarian Stir-Fry', 'ingredients': ['tofu', 'mixed vegetables', 'soy sauce'], 'health_issues': [], 'diet_preferences': ['veg']},
+    # Add more recipes as needed
+]
+
+def meal_plan():
+    allergies = input("Enter your allergies (comma-separated): ").split(',')
+    health_issues = input("Enter your health issues (comma-separated): ").split(',')
+    diet_preferences = input("Enter your diet preferences (veg or non-veg): ")
+
+    planner = PersonalizedMealPlanner(recipe_database)
+    meal_plan_result = planner.generate_personalized_meal_plan(allergies, health_issues, diet_preferences)
+    print(f"Generated Personalized Meal Plan: {meal_plan_result}")
+
+    x = input("Enter 'exit' to leave this page: ")
+    if x.lower() == "exit":
+        return 0
+
+meal_plan()
+
+
+#Grocery
+
+from datetime import datetime, timedelta
+import heapq
+class GroceryManager:
+ def _init_(self):
+    self.grocery_list = []
+    self.reminders = []
+ def add_grocery_item(self, item, expiry_date):
+    self.grocery_list.append({'item': item, 'expiry_date': expiry_date})
+    self.schedule_expiry_reminder(item, expiry_date)
+ def schedule_expiry_reminder(self, item, expiry_date):
+ # Schedule a reminder 1 day before the expiry date
+   reminder_date = datetime.strptime(expiry_date, '%Y-%m-%d') - timedelta(days=1)
+   heapq.heappush(self.reminders, (reminder_date, item))
+ def check_expiry_reminders(self):
+   current_date = datetime.now()
+   while self.reminders and self.reminders[0][0] <= current_date:
+     expired_item = heapq.heappop(self.reminders)[1]
+     print(f"Reminder: {expired_item} is expiring soon!")
+ def display_grocery_list(self):
+    print("Current Grocery List:")
+    for item_info in self.grocery_list:
+       print(f"{item_info['item']} (Expiry Date: {item_info['expiry_date']})")
+ def remove_grocery_item(self,item):
+    self.grocery_list.remove(item)
+# Example of how to use the GroceryManager
+def grocery_list():
+  grocery_manager = GroceryManager()
+  while 1:
+    print("1. Add Grocery Item")
+    print("2. Remove Grocery Item")
+    print("3. Display Grocery list")
+    print("4. Exit")
+    x=int(input("Enter your choice:"))
+    if x==1:
+      item=input("Enter the item name:")
+      expiry_date=input("Enter the expiry date (YYYY-MM-DD):")
+      grocery_manager.add_grocery_item(item,expiry_date)
+    elif x==2:
+      item=input("Enter the item name:")
+      grocery_manager.remove_grocery_item(item)
+    elif x==3:
+      grocery_manager.display_grocery_list()
+    elif x==4:
+      return 0
+    else:
+      print("Enter a choice from above")
+
+grocery_list()
+
+#CHAT WITH AI
+
+class SimpleNutritionChatbot:
+    def __init__(self):
+        pass  # You can initialize any variables or configurations here if needed
+
+    def generate_nutrition_advice(self, user_input):
+        # Simple string matching for user input
+        if "healthy snacks" in user_input.lower():
+            return "Some healthy snack options include fruits, nuts, and yogurt."
+
+        elif "weight loss" in user_input.lower():
+            return "For weight loss, focus on a balanced diet with plenty of fruits, vegetables, and lean proteins."
+
+        elif "diet plan" in user_input.lower():
+            return "A balanced diet is important for weight loss and health. Here are some recommended foods to include in your diet: fruits, vegetables, lean proteins, and whole grains."
+
+        elif "exercise" in user_input.lower():
+            return "Exercise is important for weight loss and health. Here are some exercise options: walking, cycling, or swimming."
+
+        else:
+            return "I'm sorry, I don't have information on that topic. Please consult a nutritionist for personalized advice."
+
+# Example of how to use the SimpleNutritionChatbot
+def nutritionist():
+    chatbot = SimpleNutritionChatbot()
+    print("Ask me anything regarding your health:")
+    print("If you want to leave this page, enter 'exit'")
+    while True:
+        user_input = input("User: ")
+        if user_input.lower() == "exit":
+            break
+        else:
+            nutrition_advice = chatbot.generate_nutrition_advice(user_input)
+            print(f"Nutritionist: {nutrition_advice}")
+
+nutritionist()
+
+
+#Donations
+
+class DonationManager:
+    def __init__(self):
+        self.donation_requests = []
+        self.organizations = []
+
+    def add_organization(self, organization_name):
+        self.organizations.append({'name': organization_name, 'requests': []})
+
+    def request_donation(self, user_name, quantity):
+        request = {'user_name': user_name, 'quantity': quantity, 'status': 'Pending'}
+
+        # Assign the request to the first organization in the list
+        organization = next((org for org in self.organizations), None)
+
+        if organization:
+            organization['requests'].append(request)
+            self.donation_requests.append({'organization': organization['name'], 'request': request})
+            return f"Donation request sent to {organization['name']}."
+        else:
+            return "No organizations available for donation."
+
+    def view_organization_requests(self, organization_name):
+        organization = next((org for org in self.organizations if org['name'] == organization_name), None)
+
+        if organization:
+            return organization['requests']
+        else:
+            return f"No organization found with the name {organization_name}."
+
+    def accept_donation_request(self, organization_name, request_index):
+        organization = next((org for org in self.organizations if org['name'] == organization_name), None)
+
+        if organization and 0 <= request_index < len(organization['requests']):
+            request = organization['requests'][request_index]
+            request['status'] = 'Accepted'
+            return f"Donation request accepted from {request['user_name']} for {request['quantity']} units."
+        else:
+            return "Invalid organization or request index."
+
+# Example of how to use the DonationManager
+donation_manager = DonationManager()
+
+donation_manager.add_organization('Helping Hand Foundation')
+
+user_request_result = donation_manager.request_donation('Neha', 10)
+print(user_request_result)
+
+organization_requests = donation_manager.view_organization_requests('Helping Hand Foundation')
+print(f"Organization Requests: {organization_requests}")
+
+organization_accept_result = donation_manager.accept_donation_request('Helping Hand Foundation', 0)
+print(organization_accept_result)
