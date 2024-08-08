@@ -2,3 +2,16 @@ DevOps, a blend of "development" and "operations," is a set of practices, tools,
 Here are some key components and concepts:
 
 Continuous Integration (CI): Developers frequently integrate code into a shared repository, where automated builds and tests are run. This practice helps catch bugs early and ensures that code changes are consistently integrated.
+Continuous Deployment (CD): Code changes are automatically deployed to production environments after passing the CI process. This ensures that new features, bug fixes, and improvements are delivered to users rapidly and reliably.
+
+Infrastructure as Code (IaC): Managing and provisioning computing infrastructure through machine-readable definition files, rather than physical hardware configuration or interactive configuration tools. Common tools include Terraform and Ansible.
+
+Monitoring and Logging: Continuous monitoring of applications and infrastructure to identify issues before they impact users. Tools like Prometheus, Grafana, ELK Stack (Elasticsearch, Logstash, Kibana), and Splunk are commonly used.
+
+Microservices: Designing applications as a collection of loosely coupled services. This architecture enables teams to develop, deploy, and scale services independently.
+
+Containers and Orchestration: Using containers (e.g., Docker) to package applications and their dependencies, ensuring consistency across environments. Kubernetes is a popular orchestration tool for managing containerized applications.
+
+Version Control Systems: Tools like Git enable teams to collaborate on code, track changes, and manage code versions.
+
+Collaboration and Communication: Encouraging a culture of collaboration and communication between development, operations, and other stakeholders. Tools like Slack, Jira, and Confluence support this cultural shift.
