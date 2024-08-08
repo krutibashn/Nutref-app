@@ -1,1 +1,4 @@
 DevOps, a blend of "development" and "operations," is a set of practices, tools, and a cultural philosophy that automates and integrates the processes between software development and IT teams.
+Here are some key components and concepts:
+
+Continuous Integration (CI): Developers frequently integrate code into a shared repository, where automated builds and tests are run. This practice helps catch bugs early and ensures that code changes are consistently integrated.
